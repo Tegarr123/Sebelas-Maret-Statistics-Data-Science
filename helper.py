@@ -9,7 +9,8 @@ def fix_value(df:pd.DataFrame):
     cat_val, _ = get_cat_num(df)
     for cat_col in cat_val:
         not_NaN_idx = ~df[cat_col].isna()
-        df[cat_col][not_NaN_idx] = df[cat_col][not_NaN_idx].apply(lambda x : re.sub(',','.',x)).astype(float)
+        df[cat_col][not_NaN_idx] = df[cat_col][not_NaN_idx].apply(lambda x : re.sub(',','.',x))
+        df[cat_col] = df[cat_col].astype(float)
 
 
 
