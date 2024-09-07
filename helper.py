@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+import numpy as np
 def rename_column(df:pd.DataFrame):
     df.columns = list(map(lambda s: re.sub(r'\(.*\)', '', s), df.columns))
     df.columns = list(map(lambda s : s.strip(), df.columns))
@@ -11,10 +12,6 @@ def fix_value(df:pd.DataFrame):
         not_NaN_idx = ~df[cat_col].isna()
         df[cat_col][not_NaN_idx] = df[cat_col][not_NaN_idx].apply(lambda x : re.sub(',','.',x))
         df[cat_col] = df[cat_col].astype(float)
-
-
-
-
 def get_cat_num(df:pd.DataFrame):
     cat_val = [i for i in df.columns if df[i].dtype == 'object']
     num_val = [i for i in df.columns if df[i].dtype != 'object']
